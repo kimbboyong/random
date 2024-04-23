@@ -60,6 +60,19 @@ const Result = () => {
         alert("NOT");
       });
   }
+  function loginUser2() {
+    const email = "test2@test.com";
+    const password = "12341234";
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // 로그인 성공
+        alert("OK");
+      })
+      .catch((error) => {
+        // 로그인 실패
+        alert("NOT");
+      });
+  }
 
   function logoutUser() {
     const auth = getAuth();
@@ -84,7 +97,8 @@ const Result = () => {
         ))}
       </ul>
 
-      <button onClick={loginUser}>로그인하기</button>
+      <button onClick={loginUser}>전원표</button>
+      <button onClick={loginUser2}>김준혁</button>
       <button onClick={logoutUser}>로그아웃하기</button>
     </div>
   );
