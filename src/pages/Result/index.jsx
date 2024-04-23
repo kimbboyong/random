@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebaseConfig";
 import { ref, onValue, set, push } from "firebase/database";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import Remove from "../../components/Remove";
 
 const Result = () => {
@@ -47,20 +47,32 @@ const Result = () => {
     });
   };
 
-  function loginUser(email, password) {
+  function loginUser() {
+    const email = "test@test.com";
+    const password = "12341234";
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // 로그인 성공
-        const user = userCredential.user;
-        console.log("로그인 성공:", user);
+        alert("OK");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.error("로그인 실패:", errorCode, errorMessage);
+        // 로그인 실패
+        alert("NOT");
       });
   }
-  loginUser("test@test.com", "12341234");
+
+  function logoutUser() {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        // 로그아웃 성공
+        alert("로그아웃 되었습니다.");
+      })
+      .catch((error) => {
+        // 로그아웃 실패
+        console.error("로그아웃 실패:", error);
+      });
+  }
   return (
     <div>
       <button onClick={handleClick}>윷 던지기</button>
@@ -71,6 +83,9 @@ const Result = () => {
           <li key={result.id}>{result.result}</li>
         ))}
       </ul>
+
+      <button onClick={loginUser}>로그인하기</button>
+      <button onClick={logoutUser}>로그아웃하기</button>
     </div>
   );
 };
