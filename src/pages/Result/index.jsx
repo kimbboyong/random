@@ -30,7 +30,7 @@ const Result = () => {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [result]);
 
   const handleClick = async () => {
     const results = ["도", "개", "걸", "윷", "모", "백도"];
