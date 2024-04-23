@@ -1,9 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: "random-react-f7b1b.firebaseapp.com",
+  databaseURL:
+    "https://random-react-f7b1b-default-rtdb.asia-southeast1.firebasedatabase.app/",
   projectId: "random-react-f7b1b",
   storageBucket: "random-react-f7b1b.appspot.com",
   messagingSenderId: "1067429448057",
@@ -11,4 +13,4 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
+export const db = getDatabase(app);
