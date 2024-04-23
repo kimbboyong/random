@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebaseConfig";
 import { ref, onValue, set, push } from "firebase/database";
-import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+} from "firebase/auth";
 import Remove from "../../components/Remove";
 
 const Result = () => {
@@ -9,12 +15,6 @@ const Result = () => {
   const [results, setResults] = useState([]);
 
   const auth = getAuth();
-  const user = auth.currentUser;
-  if (user) {
-    console.log("사용자가 로그인되었습니다.", user);
-  } else {
-    console.log("사용자가 로그인되지 않았습니다.");
-  }
 
   useEffect(() => {
     const resultsRef = ref(db, "yutnoriResults");
@@ -47,35 +47,39 @@ const Result = () => {
     });
   };
 
-  function loginUser() {
-    const email = "test@test.com";
-    const password = "12341234";
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // 로그인 성공
-        alert("OK");
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // 사용자가 로그인한 상태
+      console.log("로그인 상태:", user);
+    } else {
+      // 사용자가 로그아웃한 상태
+      console.log("로그아웃 상태");
+    }
+  });
+
+  const saveUserInfo = (user) => {
+    set(ref(db, "users/" + user.uid), {
+      username: user.displayName,
+      email: user.email,
+      profile_picture: user.photoURL,
+    });
+  };
+
+  // 로그인 함수 내에서 GoogleAuthProvider 인스턴스를 생성합니다.
+  const googleLogin = () => {
+    const provider = new GoogleAuthProvider(); // GoogleAuthProvider 인스턴스 생성
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        var user = result.user;
+        // 사용자 정보 저장
+        saveUserInfo(user);
       })
       .catch((error) => {
-        // 로그인 실패
-        alert("NOT");
+        // 오류 처리
       });
-  }
-  function loginUser2() {
-    const email = "test2@test.com";
-    const password = "12341234";
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // 로그인 성공
-        alert("OK");
-      })
-      .catch((error) => {
-        // 로그인 실패
-        alert("NOT");
-      });
-  }
+  };
 
   function logoutUser() {
-    const auth = getAuth();
     signOut(auth)
       .then(() => {
         // 로그아웃 성공
@@ -96,9 +100,7 @@ const Result = () => {
           <li key={result.id}>{result.result}</li>
         ))}
       </ul>
-
-      <button onClick={loginUser}>전원표</button>
-      <button onClick={loginUser2}>김준혁</button>
+      <button onClick={googleLogin}>구글로 로그인하기</button>
       <button onClick={logoutUser}>로그아웃하기</button>
     </div>
   );

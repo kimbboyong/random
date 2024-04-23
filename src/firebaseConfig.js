@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth"; // 이 부분을 추가합니다.
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -21,3 +22,18 @@ onValue(reference, (snapshot) => {
   const data = snapshot.val();
   console.log(data);
 });
+
+export const googleLogin = () => {
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      var credential = result.credential;
+      var token = credential.accessToken;
+      var user = result.user;
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    });
+};
