@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
+import { getDatabase, ref, onValue } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -14,3 +14,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
+
+const reference = ref(db, "path/to/your/data");
+
+onValue(reference, (snapshot) => {
+  const data = snapshot.val();
+  console.log(data);
+});

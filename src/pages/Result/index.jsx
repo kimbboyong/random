@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../firebaseConfig";
 import { ref, onValue, set, push } from "firebase/database";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import Remove from "../../components/Remove";
 
 const Result = () => {
   const [result, setResult] = useState("");
@@ -63,6 +64,7 @@ const Result = () => {
   return (
     <div>
       <button onClick={handleClick}>윷 던지기</button>
+      <Remove />
       <p>최신 결과: {result}</p>
       <ul>
         {results.map((result) => (
