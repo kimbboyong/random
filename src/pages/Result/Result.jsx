@@ -8,6 +8,7 @@ import PlayBtn from "./PlayBtn/PlayBtn";
 import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
+  margin-top: 80px;
   .btn {
     width: 100%;
     border: none;

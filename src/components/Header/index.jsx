@@ -34,14 +34,12 @@ const Header = () => {
   };
 
   return (
-    <>
-      <Wrapper>
-        <h2>251</h2>
-        <figure onClick={logOut}>
-          <img src="/images/logout.png" alt="" />
-        </figure>
-      </Wrapper>
-    </>
+    <Wrapper>
+      <h2>251</h2>
+      <figure onClick={logOut}>
+        <img src="/images/logout.png" alt="" />
+      </figure>
+    </Wrapper>
   );
 };
 
