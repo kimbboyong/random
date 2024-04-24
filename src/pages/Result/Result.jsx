@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   }
   ul {
     padding: 0 10px;
-    height: 100%;
+    height: auto;
     max-height: 80vh;
     padding-bottom: 35px;
     overflow-y: auto;
