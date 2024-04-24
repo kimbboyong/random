@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Wrapper } from "../SignUp/styled";
 import HowToUse from "../../components/HowToUse/HowToUse";
 import styled from "styled-components";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebaseConfig";
 
 const SignUps = styled.span`
   margin-bottom: 20px;
@@ -36,10 +38,10 @@ const SignUp = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (email === "" || password === "") return;
-
     try {
       setIsLoading(true);
-      navigate("/protec");
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/game1");
     } catch (e) {
       console.log(e);
     } finally {
