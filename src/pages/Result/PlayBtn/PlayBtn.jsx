@@ -1,6 +1,7 @@
 import { db } from "../../../firebaseConfig";
 import { ref, onValue, set, push } from "firebase/database";
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const GoBtn = styled.button`
@@ -18,6 +19,8 @@ const GoBtn = styled.button`
 `;
 
 const PlayBtn = () => {
+  const userData = useSelector((state) => state.auth.currentUser);
+
   const handleClick = async () => {
     const results = ["도", "개", "걸", "윷", "모", "백도"];
     const randomResult = results[Math.floor(Math.random() * results.length)];
@@ -25,11 +28,13 @@ const PlayBtn = () => {
     const newResultRef = push(ref(db, "yutnoriResults"));
     await set(newResultRef, {
       result: randomResult,
+      displayName: userData && userData.displayName,
     });
 
     const latestResultRef = ref(db, "yutnori/latestResult");
     await set(latestResultRef, {
       result: randomResult,
+      displayName: userData && userData.displayName,
     });
   };
 

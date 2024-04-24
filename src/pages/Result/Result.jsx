@@ -131,7 +131,7 @@ const Result = () => {
               <span>KE441</span>
             </div>
             <div className="name">
-              <span>{userData && userData.displayName}</span>
+              <span>{result.displayName}</span>
             </div>
             <div className="result">
               <span>제2여객터미널</span>
