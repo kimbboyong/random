@@ -20,8 +20,8 @@ const Wrapper = styled.div`
   ul {
     padding: 0 10px;
     height: 100%;
-    max-height: calc(100vh - 180px);
-    padding-bottom: 20px;
+    max-height: 80vh;
+    padding-bottom: 35px;
     overflow-y: auto;
   }
 
@@ -87,6 +87,7 @@ const BtnWrap = styled.div`
   left: 0;
   bottom: 0;
   padding: 0 15px;
+  background: #000;
 `;
 
 const Result = () => {
