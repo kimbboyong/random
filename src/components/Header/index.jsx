@@ -6,7 +6,7 @@ import { auth } from "../../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
-  padding: 100px 0 10px;
+  padding: 20px 0 10px;
   margin-bottom: 60px;
   border-bottom: 1px solid #ccc;
   display: flex;
