@@ -17,7 +17,7 @@ const List = styled.ul`
 const HowToUse = () => {
   return (
     <List>
-      <li style={{ fontWeight: "bold" }}>사용법</li>
+      <li style={{ fontWeight: "bold" }}>사용법(모바일만 해당)</li>
       <li>1. URL복사 후 크롬으로 켠다. </li>
       <li>2. 설정창을 켠 후 데스크톱 버전으로 보기를 누른다. </li>
       <li>3. 로그인을 한다.</li>
