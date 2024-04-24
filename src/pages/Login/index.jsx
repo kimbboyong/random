@@ -1,58 +1,80 @@
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./firebase";
+import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+import { Form, Wrapper } from "../SignUp/styled";
+import HowToUse from "../../components/HowToUse/HowToUse";
+import styled from "styled-components";
+
+const SignUps = styled.span`
+  margin-bottom: 20px;
+  display: block;
+  color: #fff;
+  a {
+    font-size: 18px;
+  }
+`;
+
+const SignUp = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  // 로그인 함수
-  const loginUser = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // 로그인 성공
-        const user = userCredential.user;
-        console.log("로그인 성공:", user);
-      })
-      .catch((error) => {
-        // 로그인 실패
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.error("로그인 실패:", errorCode, errorMessage);
-      });
+  const onChange = (e) => {
+    const {
+      target: { name, value },
+    } = e;
+
+    if (name === "email") {
+      setEmail(value);
+    } else if (name === "password") {
+      setPassword(value);
+    }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); // 폼 제출 시 페이지 새로고침 방지
-    loginUser(email, password); // 로그인 시도
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (email === "" || password === "") return;
+
+    try {
+      setIsLoading(true);
+      navigate("/protec");
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <Wrapper>
+      <Form action="" onSubmit={onSubmit}>
+        <input
+          onChange={onChange}
+          type="email"
+          name="email"
+          placeholder="이메일 ㄱ"
+          required
+        />
+        <input
+          onChange={onChange}
+          type="password"
+          name="password"
+          placeholder="비번 ㄱ "
+          required
+        />
+
+        <input type="submit" value={isLoading ? "ㄱㄷ" : "로그인"} />
+      </Form>
+
+      <SignUps>
+        아디없슴? 그럼 <Link to="/signup">회원가입</Link> 하셈{" "}
+      </SignUps>
+
+      <HowToUse />
+    </Wrapper>
   );
 };
 
-export default Login;
+export default SignUp;
