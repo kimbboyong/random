@@ -12,11 +12,8 @@ import { clearUser, setUser } from "./redux/auth/authSlice";
 import Protected from "./pages/Protected/Protected";
 
 const Wrapper = styled.div`
-  /* background: url(/images/bg.jpeg) no-repeat center;
-  background-size: cover;
-  height: 100vh; */
+  overflow: hidden;
   width: 100%;
-
   padding: 0 15px;
   background: #000;
   height: 100vh;
