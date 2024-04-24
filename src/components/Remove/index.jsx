@@ -1,6 +1,7 @@
 import React from "react";
-import { getDatabase, ref, remove } from "firebase/database";
+import { getDatabase, ref, remove, set } from "firebase/database";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 const Btn = styled.button`
   width: 100%;
   border: none;
@@ -22,19 +23,35 @@ const Btn = styled.button`
 `;
 
 const Remove = () => {
+  const userData = useSelector((state) => state.auth.currentUser);
+
   const handleReset = () => {
     const db = getDatabase();
+    const userName = userData && userData.displayName;
+    const safeDateTime = new Date().toISOString().replace(/[:.]/g, "-");
+    const deletionLogRef = ref(db, `/deletionLog/${safeDateTime}`);
 
-    const reference = ref(db, "/yutnoriResults");
+    const logData = {
+      deletedBy: userName,
+      deletedAt: new Date().toISOString(),
+    };
 
-    remove(reference)
+    set(deletionLogRef, logData)
       .then(() => {
-        console.log("Data removed successfully");
+        const reference = ref(db, "/yutnoriResults");
+        remove(reference)
+          .then(() => {
+            console.log("삭제댐");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       })
       .catch((error) => {
-        console.error("Failed to remove data", error);
+        console.error("오류", error);
       });
   };
+
   return (
     <Btn onClick={handleReset}>
       <figure>
