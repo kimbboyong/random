@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   ul {
     padding: 0 10px;
     height: 100%;
-    max-height: calc(100vh - 300px);
+    max-height: calc(100vh - 180px);
     padding-bottom: 20px;
     overflow-y: auto;
   }
@@ -83,7 +83,7 @@ const BtnWrap = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   place-items: center;
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
   padding: 0 15px;
