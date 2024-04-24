@@ -97,9 +97,9 @@ const Result = () => {
   const auth = getAuth();
   const user = auth.currentUser;
   if (user) {
-    console.log("사용자가 로그인되었습니다.", user);
+    console.log("로그인 댐");
   } else {
-    console.log("사용자가 로그인되지 않았습니다.");
+    console.log("로그인 안댐");
   }
 
   useEffect(() => {
@@ -131,7 +131,7 @@ const Result = () => {
               <span>KE441</span>
             </div>
             <div className="name">
-              <span>{userData && userData.displayName}</span>
+              <span>{results.displayName}</span>
             </div>
             <div className="result">
               <span>제2여객터미널</span>
