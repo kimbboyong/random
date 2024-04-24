@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   padding: 20px 0 10px;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
   display: flex;
   justify-content: center;
