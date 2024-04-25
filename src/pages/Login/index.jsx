@@ -71,7 +71,7 @@ const SignUp = () => {
       </Form>
 
       <SignUps>
-        아디없슴? 그럼 <Link to="/signup">회원가입</Link> 하셈
+        <Link to="/signup">회원가입</Link> 하셈
       </SignUps>
 
       <HowToUse />
