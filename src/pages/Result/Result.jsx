@@ -104,6 +104,10 @@ const Name = styled.span`
       return css`
         ${floatAnimation} 1s ease-in-out infinite
       `;
+    } else if (props.displayName === "표땅이") {
+      return css`
+        ${smoke} 5s ease-in-out infinite;
+      `;
     }
   }};
   font-weight: bold;
@@ -153,20 +157,18 @@ const floatAnimation = keyframes`
     transform: translateY(-5px);
   }
 `;
-
-const rainbowAnimation = keyframes`
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
-`;
-
-const fadeRainbowAnimation = keyframes`
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
+const smoke = keyframes`
+	0% {
+		transform: rotate(0deg) translateY(0);
+		opacity: 1;
+		filter: blur(1px);
+	}
+	
+	100% {
+		transform: rotate(45deg) translateY(-250px);
+		opacity: 0;
+		filter: blur(20px);
+	}
 `;
 
 const Result = () => {
