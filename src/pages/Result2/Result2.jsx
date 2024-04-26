@@ -101,6 +101,7 @@ const Result2 = () => {
                     <li key={index}>{number}</li>
                   ))}
               </ul>
+              <div>총합: {totalSum}</div>
             </li>
           ) : null
         )}
