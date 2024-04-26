@@ -3,10 +3,9 @@ import { db } from "../../firebaseConfig";
 import { ref, onValue } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import Remove from "../../components/Remove";
-import styled from "styled-components";
 import PlayBtn from "./PlayBtn/PlayBtn";
 import { useSelector } from "react-redux";
-
+import styled, { keyframes, css } from "styled-components";
 const Wrapper = styled.div`
   .btn {
     width: 100%;
@@ -84,7 +83,6 @@ const Name = styled.span`
     else if (props.displayName === "김뽀용") return "#fff;";
     else return "#e5cb50";
   }};
-
   text-shadow: ${(props) => {
     if (props.displayName === "표땅이")
       return "-1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;";
@@ -95,6 +93,11 @@ const Name = styled.span`
   0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;`;
     else return "none";
   }};
+  animation: ${(props) =>
+    props.displayName === "김뽀용" &&
+    css`
+      ${glowAnimation} 2s ease-in-out infinite
+    `};
   width: 60px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -118,6 +121,18 @@ const BtnWrap = styled.div`
   bottom: 0;
   padding: 0 15px;
   background: #000;
+`;
+
+const glowAnimation = keyframes`
+  0% {
+    text-shadow: 0 0 7px #f00, 0 0 10px #f00, 0 0 21px #f00;
+  }
+  50% {
+    text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+  }
+  100% {
+    text-shadow: 0 0 7px #f00, 0 0 10px #f00, 0 0 21px #f00;
+  }
 `;
 
 const Result = () => {
