@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { auth } from "./firebaseConfig";
 import { clearUser, setUser } from "./redux/auth/authSlice";
 import Protected from "./pages/Protected/Protected";
+import Result2 from "./pages/Result2/Result2";
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -46,6 +47,7 @@ function App() {
           <Route index element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/game1" element={<Result />} />
+          <Route path="/game2" element={<Result2 />} />
           <Route path="/protec" element={<Protected />} />
         </Route>
       </Routes>
