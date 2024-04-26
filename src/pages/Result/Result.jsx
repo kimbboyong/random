@@ -81,6 +81,7 @@ const Name = styled.span`
   color: ${(props) => {
     if (props.displayName === "표땅이") return "#000";
     else if (props.displayName === "배영진") return "#000";
+    else if (props.displayName === "김뽀용") return "#fff;";
     else return "#e5cb50";
   }};
 
@@ -89,6 +90,9 @@ const Name = styled.span`
       return "-1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;";
     else if (props.displayName === "배영진")
       return "-1px 0 green, 0 1px green, 1px 0 green, 0 -1px green";
+    else if (props.displayName === "김뽀용")
+      return `0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
+  0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;`;
     else return "none";
   }};
   width: 60px;
