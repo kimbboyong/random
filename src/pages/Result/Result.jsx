@@ -78,10 +78,19 @@ const Wrapper = styled.div`
 `;
 
 const Name = styled.span`
-  color: ${(props) => (props.isSpecial ? "#000" : "#e5cb50")} !important;
-  text-shadow: ${(props) =>
-    props.isSpecial &&
-    "-1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;"} !important;
+  color: ${(props) => {
+    if (props.displayName === "표땅이") return "#000";
+    else if (props.displayName === "배영진") return "#000";
+    else return "#e5cb50";
+  }};
+
+  text-shadow: ${(props) => {
+    if (props.displayName === "표땅이")
+      return "-1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;";
+    else if (props.displayName === "배영진")
+      return "-1px 0 green, 0 1px green, 1px 0 green, 0 -1px green";
+    else return "none";
+  }};
   width: 60px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -149,9 +158,7 @@ const Result = () => {
               <span>KE441</span>
             </div>
             <div className="name">
-              <Name isSpecial={result.displayName === "표땅이"}>
-                {result.displayName}
-              </Name>
+              <Name displayName={result.displayName}>{result.displayName}</Name>
               {/* <span>{result.displayName}</span> */}
             </div>
             <div className="result">
