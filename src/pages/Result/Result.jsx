@@ -79,25 +79,34 @@ const Wrapper = styled.div`
 const Name = styled.span`
   color: ${(props) => {
     if (props.displayName === "표땅이") return "#000";
-    else if (props.displayName === "배영진") return "#000";
+    else if (props.displayName === "배영진") return "transparent";
     else if (props.displayName === "김뽀용") return "#fff;";
     else return "#e5cb50";
   }};
   text-shadow: ${(props) => {
     if (props.displayName === "표땅이")
       return "-1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;";
-    else if (props.displayName === "배영진")
-      return "-1px 0 green, 0 1px green, 1px 0 green, 0 -1px green";
     else if (props.displayName === "김뽀용")
       return `0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
   0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;`;
     else return "none";
   }};
-  animation: ${(props) =>
-    props.displayName === "김뽀용" &&
-    css`
-      ${glowAnimation} 2s ease-in-out infinite
-    `};
+  background-image: ${(props) =>
+    props.displayName === "배영진"
+      ? "linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet)"
+      : "none"};
+  animation: ${(props) => {
+    if (props.displayName === "김뽀용")
+      return css`
+        ${glowAnimation} 2s ease-in-out infinite
+      `;
+    else if (props.displayName === "배영진") {
+      return css`
+        ${floatAnimation} 1s ease-in-out infinite
+      `;
+    }
+  }};
+  font-weight: bold;
   width: 60px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -108,6 +117,7 @@ const Name = styled.span`
   word-break: break-all;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
+  -webkit-background-clip: text;
 `;
 
 const BtnWrap = styled.div`
@@ -132,6 +142,30 @@ const glowAnimation = keyframes`
   }
   100% {
     text-shadow: 0 0 7px #f00, 0 0 10px #f00, 0 0 21px #f00;
+  }
+`;
+
+const floatAnimation = keyframes`
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+`;
+
+const rainbowAnimation = keyframes`
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+`;
+
+const fadeRainbowAnimation = keyframes`
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
   }
 `;
 
