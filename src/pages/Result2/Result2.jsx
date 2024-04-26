@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { db, auth } from "../../firebaseConfig";
-import { ref, set, push, onValue } from "firebase/database";
+import { ref, set, push, onValue, remove } from "firebase/database";
 
 const Wrapper = styled.div`
   background: #fff;
@@ -20,6 +20,7 @@ const Result2 = () => {
   const [players, setPlayers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [isOver21, setIsOver21] = useState(false);
+  const [totalSum, setTotalSum] = useState(0);
 
   useEffect(() => {
     const unsubscribeAuth = auth.onAuthStateChanged((user) => {
@@ -64,9 +65,8 @@ const Result2 = () => {
     if (user && user.randomNumbers) {
       const numbers = Object.values(user.randomNumbers);
       const sum = sumNumbers(numbers);
-      if (sum > 21) {
-        setIsOver21(true);
-      }
+      setTotalSum(sum);
+      setIsOver21(sum > 21);
     }
   };
 
@@ -76,8 +76,17 @@ const Result2 = () => {
       const numbers = Object.values(currentUserData.randomNumbers);
       const sum = sumNumbers(numbers);
       setIsOver21(sum > 21);
+      setTotalSum(sum);
     }
-  }, [players, currentUser]);
+  }, [players, currentUser, totalSum]);
+
+  const resetNumbers = (userId) => {
+    const randomNumberRef = ref(db, `users/${userId}/randomNumbers`);
+    remove(randomNumberRef).then(() => {
+      setIsOver21(false);
+      setTotalSum(0);
+    });
+  };
 
   return (
     <Wrapper>
@@ -104,13 +113,12 @@ const Result2 = () => {
               players.find((p) => p.id === currentUser?.uid)?.randomNumbers
             ).map((number, index) => <li key={index}>{number}</li>)}
         </ul>
-        <button
-          onClick={() => generateRandomNumber(currentUser?.uid)}
-          disabled={isOver21}
-        >
-          뽑기
+        <button onClick={() => generateRandomNumber(currentUser?.uid)}>
+          추가
         </button>
-        {isOver21 && <Over21Indicator>X</Over21Indicator>}
+        <button onClick={() => resetNumbers(currentUser?.uid)}>리셋</button>
+        {isOver21 && <Over21Indicator>죽음 ㅅㄱ</Over21Indicator>}
+        <div>총합: {totalSum}</div>
       </div>
     </Wrapper>
   );
