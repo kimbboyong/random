@@ -53,7 +53,7 @@ const Wrapper = styled.div`
     .code span {
       color: #5db06c;
     }
-    .name span {
+    /* .name span {
       color: #e5cb50;
       width: 60px;
       display: -webkit-box;
@@ -65,7 +65,7 @@ const Wrapper = styled.div`
       word-break: break-all;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 1;
-    }
+    } */
     .result {
       span {
         color: #77b5cb;
@@ -75,6 +75,23 @@ const Wrapper = styled.div`
       }
     }
   }
+`;
+
+const Name = styled.span`
+  color: ${(props) => (props.isSpecial ? "#000" : "#e5cb50")} !important;
+  text-shadow: ${(props) =>
+    props.isSpecial &&
+    "-1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;"} !important;
+  width: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: box;
+  overflow: hidden;
+  vertical-align: top;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 `;
 
 const BtnWrap = styled.div`
@@ -132,7 +149,10 @@ const Result = () => {
               <span>KE441</span>
             </div>
             <div className="name">
-              <span>{result.displayName}</span>
+              <Name isSpecial={result.displayName === "표땅이"}>
+                {result.displayName}
+              </Name>
+              {/* <span>{result.displayName}</span> */}
             </div>
             <div className="result">
               <span>제2여객터미널</span>
