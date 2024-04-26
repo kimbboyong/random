@@ -153,7 +153,8 @@ const glowAnimation2 = keyframes`
     text-shadow:-1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
   }
   50% {
-    text-shadow: 0 0 7px #f7d2d2, 0 0 10px #f7d2d2, 0 0 21px #f7d2d2, 0 0 42px #f7d2d2, 0 0 82px #000, 0 0 92px #000, 0 0 102px #000, 0 0 151px #000;
+    text-shadow: 0 0 7px red, 0 0 10px red, 0 0 21px #f7d2d2, 0 0 42px #f7d2d2, 0 0 82px #000, 0 0 92px #000, 0 0 102px #000, 0 0 151px #000;
+    color: #000;
   }
   100% {
     text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
