@@ -85,8 +85,7 @@ const Name = styled.span`
   }};
   text-shadow: ${(props) => {
     if (props.displayName === "표땅이")
-      return `0 0 7px #000, 0 0 10px #000, 0 0 21px #000, 0 0 42px #f00,
-  0 0 82px #f00, 0 0 92px #f00, 0 0 102px #f00, 0 0 151px #f00;`;
+      return "-1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;";
     else if (props.displayName === "김뽀용")
       return `0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
   0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;`;
@@ -151,13 +150,13 @@ const glowAnimation = keyframes`
 `;
 const glowAnimation2 = keyframes`
   0% {
-    text-shadow: 0 0 7px #f00, 0 0 10px #f00, 0 0 21px #f00;
+    text-shadow:-1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
   }
   50% {
-    text-shadow: 0 0 7px #7300ff, 0 0 10px #7300ff, 0 0 21px #7300ff, 0 0 42px #0fa, 0 0 82px #f00, 0 0 92px #f00, 0 0 102px #f00, 0 0 151px #f00;
+    text-shadow: 0 0 7px #f7d2d2, 0 0 10px #f7d2d2, 0 0 21px #f7d2d2, 0 0 42px #f7d2d2, 0 0 82px #000, 0 0 92px #000, 0 0 102px #000, 0 0 151px #000;
   }
   100% {
-    text-shadow: 0 0 7px #f00, 0 0 10px #f00, 0 0 21px #f00;
+    text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
   }
 `;
 
