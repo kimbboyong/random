@@ -45,7 +45,7 @@ const Result2 = () => {
     <Wrapper>
       <PlayerList>
         {players.map((player) =>
-          player.email !== currentUser?.email ? (
+          player.displayName !== currentUser?.displayName ? (
             <li key={player.id}>{player.displayName}</li>
           ) : null
         )}

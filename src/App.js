@@ -7,11 +7,11 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { auth } from "./firebaseConfig";
+import { auth, db } from "./firebaseConfig";
 import { clearUser, setUser } from "./redux/auth/authSlice";
 import Protected from "./pages/Protected/Protected";
 import Result2 from "./pages/Result2/Result2";
-
+import { ref, set } from "firebase/database";
 const Wrapper = styled.div`
   overflow: hidden;
   width: 100%;
@@ -26,6 +26,12 @@ function App() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
+        set(ref(db, "users/" + user.uid), {
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName,
+        });
+
         dispatch(
           setUser({
             uid: user.uid,
