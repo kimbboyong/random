@@ -85,7 +85,8 @@ const Name = styled.span`
   }};
   text-shadow: ${(props) => {
     if (props.displayName === "표땅이")
-      return "-1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;";
+      return `0 0 7px #000, 0 0 10px #000, 0 0 21px #000, 0 0 42px #f00,
+  0 0 82px #f00, 0 0 92px #f00, 0 0 102px #f00, 0 0 151px #f00;`;
     else if (props.displayName === "김뽀용")
       return `0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
   0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;`;
@@ -106,7 +107,7 @@ const Name = styled.span`
       `;
     } else if (props.displayName === "표땅이") {
       return css`
-        ${smoke} 5s ease-in-out infinite;
+        ${glowAnimation2} 2s ease-in-out infinite
       `;
     }
   }};
@@ -148,6 +149,17 @@ const glowAnimation = keyframes`
     text-shadow: 0 0 7px #f00, 0 0 10px #f00, 0 0 21px #f00;
   }
 `;
+const glowAnimation2 = keyframes`
+  0% {
+    text-shadow: 0 0 7px #f00, 0 0 10px #f00, 0 0 21px #f00;
+  }
+  50% {
+    text-shadow: 0 0 7px #7300ff, 0 0 10px #7300ff, 0 0 21px #7300ff, 0 0 42px #0fa, 0 0 82px #f00, 0 0 92px #f00, 0 0 102px #f00, 0 0 151px #f00;
+  }
+  100% {
+    text-shadow: 0 0 7px #f00, 0 0 10px #f00, 0 0 21px #f00;
+  }
+`;
 
 const floatAnimation = keyframes`
   0%, 100% {
@@ -156,19 +168,6 @@ const floatAnimation = keyframes`
   50% {
     transform: translateY(-5px);
   }
-`;
-const smoke = keyframes`
-	0% {
-		transform: rotate(0deg) translateY(0);
-		opacity: 1;
-		filter: blur(1px);
-	}
-	
-	100% {
-		transform: rotate(45deg) translateY(-250px);
-		opacity: 0;
-		filter: blur(20px);
-	}
 `;
 
 const Result = () => {
