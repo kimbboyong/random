@@ -2,8 +2,10 @@ import React from "react";
 // import { useSelector } from "react-redux";
 
 import styled from "styled-components";
-import { auth } from "../../firebaseConfig";
+import { auth, db } from "../../firebaseConfig";
+import { ref, remove } from "firebase/database";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
   padding: 20px 0 10px;
@@ -26,11 +28,22 @@ const Wrapper = styled.div`
 
 const Header = () => {
   const navigate = useNavigate();
-  // const user = useSelector((state) => state.auth.currentUser);
+  const user = useSelector((state) => state.auth.currentUser);
 
   const logOut = () => {
-    auth.signOut();
-    navigate("/");
+    if (user) {
+      const userId = user.uid;
+      const userRef = ref(db, `users/${userId}`);
+      remove(userRef)
+        .then(() => {
+          console.log("사용자 정보 삭제 성공");
+          auth.signOut();
+          navigate("/");
+        })
+        .catch((error) => {
+          console.error("사용자 정보 삭제 실패:", error);
+        });
+    }
   };
 
   return (
