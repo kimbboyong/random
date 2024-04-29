@@ -117,7 +117,7 @@ const Result2 = () => {
             className="add"
             onClick={() => generateRandomNumber(currentUser?.uid)}
           >
-            추가
+            뽑기
           </button>
           <button
             className="remove"

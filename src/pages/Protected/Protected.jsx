@@ -13,8 +13,6 @@ const Protected = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  console.log(currentUser);
-
   if (!currentUser) {
     return <Navigate to="/" />;
   }
