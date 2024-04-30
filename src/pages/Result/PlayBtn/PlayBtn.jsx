@@ -22,7 +22,7 @@ const PlayBtn = () => {
   const userData = useSelector((state) => state.auth.currentUser);
 
   const handleClick = async () => {
-    const results = ["도", "개", "걸", "윷", "모", "백도"];
+    const results = ["도", "도", "개", "개", "걸", "걸", "윷", "모", "백도"];
     const randomResult = results[Math.floor(Math.random() * results.length)];
 
     const newResultRef = push(ref(db, "yutnoriResults"));
